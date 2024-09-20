@@ -1,0 +1,45 @@
+
+.req_input{
+    display: block;
+}
+
+.nreq_input {
+    display: none;
+}
+
+#regist_form{
+    margin: 10px;
+}
+
+.input_area{
+    margin-top: 10px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid grey;
+}
+
+.submit_area {
+    margin-top: 10px;
+}
+
+#regist_form > div > div {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#regist_form > div > div >div {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#rule_area{
+    display: flex;
+    width: 50% !important;
+}
+
+#rule_area > label {
+    width: 50%;
+}
+
+div > input[type="text"],input[type="date"]{
+    width: 100%;
+}

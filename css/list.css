@@ -1,0 +1,72 @@
+.event {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.event_info {
+    display: flex;
+    align-items: center;
+    background-color: rgb(50 50 50);;
+    padding: 3px 10px;
+    width: calc(100% - 20px);
+    height: 15px;
+}
+
+.match {
+    display: table;
+    width: calc( 100% - 20px );
+    margin: 0px 10px;
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+}
+
+.match>div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.results {
+    width: calc( 100% - 20px );
+}
+
+.note,
+.turn,
+.winlose {
+    width: 20px;
+    text-align: center;
+}
+
+.result {
+    display: table;
+    width: 100%;
+    padding: 3px 0px;
+}
+
+.result:not(:last-child){
+    border-bottom: 1px dotted gray;
+}
+
+.result > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.rNo {
+    padding: 0px 3px;
+    width: 29px;
+}
+
+.decks {
+    display: table;
+    width: calc(100% - 75px);
+}
+
+.deck_label{
+    display: table-cell;
+    width: 60px;
+}
+
+.mydeck,
+.enemydeck{
+    display: table-cell;
+}

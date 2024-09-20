@@ -1,0 +1,147 @@
+<form id="regist_form">
+  <div id="match_info" class="input_area">
+    <input type="hidden" name="match_id" value="1" />
+    <div id="rule_area">
+      <label class="label">
+        <input type="radio" name="rule" value="1" checked />
+        <span>BO1</span>
+      </label>
+      <label class="label">
+        <input type="radio" name="rule" value="2" />
+        <span>BO3</span>
+      </label>
+    </div>
+    <div id="date_area">
+      <input type="date" name="date" required />
+    </div>
+    <div id="tag_area">
+      <span class="label">タグ</span>
+      <input type="text" name="tag" value="" required />
+    </div>
+    <div id="note_area">
+      <span class="label">メモ</span>
+      <input type="text" name="note" value="" />
+    </div>
+  </div>
+  <div>
+    <div class="req_input input_area" data-nresult="1">
+      <div class="label">1戦目</div>
+      <input type="hidden" name="result_id1" value="1" />
+      <div class="turn_area1">
+        <label class="label">
+          <input type="radio" name="turn1" value="1" class="radioDef" checked />
+          <span>先攻</span>
+        </label>
+        <label class="label">
+          <input type="radio" name="turn1" value="2" />
+          <span>後攻</span>
+        </label>
+      </div>
+      <div>
+        <label class="label">
+          <input
+            type="radio"
+            name="winlose1"
+            value="1"
+            class="radioDef winlose"
+            checked
+          />
+          <span>勝ち</span>
+        </label>
+        <label class="label">
+          <input type="radio" name="winlose1" value="2" class="winlose" />
+          <span>負け</span>
+        </label>
+      </div>
+      <div>
+        <span class="label">使用デッキ</span>
+        <input type="text" name="mydeck1" value="" required />
+      </div>
+      <div>
+        <span class="label">対戦デッキ</span>
+        <input type="text" name="enemydeck1" value="" required />
+      </div>
+    </div>
+    <div class="onlyBO3 nreq_input input_area" data-nresult="2">
+      <div class="label">2戦目</div>
+      <input type="hidden" name="result_id2" value="2" />
+      <div class="turn_area2">
+        <label class="label">
+          <input type="radio" name="turn2" value="1" class="radioDef" checked />
+          <span>先攻</span>
+        </label>
+        <label class="label">
+          <input type="radio" name="turn2" value="2" />
+          <span>後攻</span>
+        </label>
+      </div>
+      <div>
+        <label class="label">
+          <input
+            type="radio"
+            name="winlose2"
+            value="1"
+            class="radioDef winlose"
+            checked
+          />
+          <span>勝ち</span>
+        </label>
+        <label class="label">
+          <input type="radio" name="winlose2" value="2" class="winlose" />
+          <span>負け</span>
+        </label>
+      </div>
+      <div>
+        <span class="label">使用デッキ</span>
+        <input type="text" name="mydeck2" value="" required />
+      </div>
+      <div>
+        <span class="label">対戦デッキ</span>
+        <input type="text" name="enemydeck2" value="" required />
+      </div>
+    </div>
+    <div class="onlyBO3 nreq_input input_area" data-nresult="3">
+      <div class="label">3戦目</div>
+      <input type="hidden" name="result_id3" value="3" />
+      <div class="turn_area3">
+        <label class="label">
+          <input type="radio" name="turn3" value="1" class="radioDef" checked />
+          <span>先攻</span>
+        </label>
+        <label class="label">
+          <input type="radio" name="turn3" value="2" />
+          <span>後攻</span>
+        </label>
+      </div>
+      <div>
+        <label class="label">
+          <input
+            type="radio"
+            name="winlose3"
+            value="1"
+            class="radioDef winlose"
+            checked
+          />
+          <span>勝ち</span>
+        </label>
+        <label class="label">
+          <input type="radio" name="winlose3" value="2" class="winlose" />
+          <span>負け</span>
+        </label>
+      </div>
+      <div>
+        <span class="label">使用デッキ</span>
+        <input type="text" name="mydeck3" value="" required />
+      </div>
+      <div>
+        <span class="label">対戦デッキ</span>
+        <input type="text" name="enemydeck3" value="" required />
+      </div>
+    </div>
+  </div>
+  <div class="submit_area">
+    <input type="submit" id="regist" name="regist" value="登録" />
+  </div>
+</form>
+<script src="./js/input.js"></script>
+<link type="text/css" rel="stylesheet" href="./css/input.css" />

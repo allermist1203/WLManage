@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>勝敗管理</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link type="text/css" rel="stylesheet" href="./css/index.css" />
+    <link type="text/css" rel="stylesheet" href="./css/shared.css" />
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <div id="header" class="pillar">
+      <select id="game_selector" class="label header_title"></select>
+      <div id="non_selector" class="label header_title"></div>
+    </div>
+    <div id="content"></div>
+    <div id="footer" class="pillar">
+      <div class="label changemode" data-mode="input">入力</div>
+      <div class="label changemode" data-mode="statistics">統計</div>
+      <div class="label changemode" data-mode="list">一覧</div>
+      <div class="label changemode" data-mode="settings">設定</div>
+    </div>
+    <div id="loading">
+      <div>処理中</div>
+    </div>
+  </body>
+  <script src="./js/config.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/shared.js"></script>
+  <script src="./js/db_access.js"></script>
+</html>
