@@ -87,10 +87,16 @@ function getDataByEvent(game_code) {
     }
     // matchesテーブルから取得し、取得したデータをもとにresultsからも取得
     getFilteredData(
+        DB_NAME,
         MATCHES_TABLES,
         matchesFilter,
         () => {
-            getFilteredData(RESULTS_TABLES, resultsFilter, setupList)
+            getFilteredData(
+                DB_NAME,
+                RESULTS_TABLES,
+                resultsFilter,
+                setupList
+            )
         }
     );
 }

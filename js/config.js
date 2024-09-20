@@ -37,3 +37,7 @@ const MESSGES = {
     'data_in': 'データを復元しますか?<br>※データは上書きされます',
     'deal_OK': '処理が完了しました',
 }
+
+const WAIT_SECOND = 1;
+const MAX_WAIT_SECOND = 60;
+const MAX_WAIT = MAX_WAIT_SECOND/WAIT_SECOND;

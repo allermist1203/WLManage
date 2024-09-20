@@ -10,8 +10,14 @@ function displayLoading() {
     $('#loading').css('display', 'flex');
 }
 
-function aryMin( ary) {
-    return ary.reduce((a, b) => { return Math.min(a, b) });
+function aryMin(ary) {
+    if (ary.length == 0) return 0;
+    else return ary.reduce((a, b) => { return Math.min(a, b) });
+}
+
+function aryMax( ary) {
+    if (ary.length == 0) return 0;
+    else return ary.reduce((a, b) => { return Math.max(a, b) });
 }
 
 function dictKeyDecSort(dictAry) {
@@ -78,5 +84,21 @@ async function jsonUpload( callbackFunc){
             callbackFunc(JSON.parse(e.target.result));
         };
         reader.readAsText(file);
+    }
+}
+
+async function timer(second) {
+    return new Promise(resolve => setTimeout(resolve, 1000 * second));
+}
+
+async function wait( judgeFunc, callbackFunc) {
+    for (var i = 0; i < MAX_WAIT; i++){
+        await timer(WAIT_SECOND);
+        if (judgeFunc()) {
+            callbackFunc();
+            break;
+        } else if (i == MAX_WAIT - 1) {
+            throw new Error('MAX_WAIT');
+        }
     }
 }

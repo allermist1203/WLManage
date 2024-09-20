@@ -82,9 +82,13 @@ $('#regist_form').submit( function (event) {
 });
 
 function setupInputFrom() {
-    const setDisplay = (data) => {
-        var newMatchId = data[MATCHES_TABLES] + 1;
-        var newNResult = data[RESULTS_TABLES] + 1;
+    var matchInfos = { 'ids': [], 'tags': [] };
+    var resultInfos = { 'ids': [], 'decks': [] };
+    var finGetMatchInfos = false;
+    var finGetResulInfos = false;
+    const setDisplay = () => {
+        var newMatchId = aryMax(matchInfos['ids']) + 1;
+        var newNResult = aryMax(resultInfos['ids']) + 1;
         $('input[name="match_id"]').val(newMatchId);
         $('input[name="result_id1"]').val(newNResult);
         $('input[name="result_id2"]').val(newNResult + 1);
@@ -92,7 +96,18 @@ function setupInputFrom() {
         changeRequired();
         undisplayLoading();
     };
-    countData([MATCHES_TABLES,RESULTS_TABLES],setDisplay);
+    const getMatchInfos = (cursor) => {
+        matchInfos['ids'].push(cursor.value.id);
+        matchInfos['tags'].push(cursor.value.tag);
+    }
+    const getResulInfos = (cursor) => {
+        resultInfos['ids'].push(cursor.value.id);
+        resultInfos['decks'].push(cursor.value.mydeck);
+        resultInfos['decks'].push(cursor.value.enemydeck);
+    }
+    getFilteredData(DB_NAME, MATCHES_TABLES, getMatchInfos, () => { finGetMatchInfos = true; });
+    getFilteredData(DB_NAME, RESULTS_TABLES, getResulInfos, () => { finGetResulInfos = true; });
+    wait(() => { return finGetMatchInfos&&finGetResulInfos}, setDisplay);
 }
 
 function changeRequired() {

@@ -2,9 +2,6 @@ const DB_NAME = 'wlmapp'
 const MATCHES_TABLES = 'matches';
 const RESULTS_TABLES = 'results';
 const DB_VERSION = 1;
-const WAIT_SECOND = 1;
-const MAX_WAIT_SECOND = 60;
-const MAX_WAIT = MAX_WAIT_SECOND/WAIT_SECOND;
 const READYSTATE_OK = 'done';
 
 const TABLES = {
@@ -105,10 +102,10 @@ function insertData(db_name, data, callbackFunc = () => { }) {
     };
 }
 
-function countData( tables, callbackFunc) {
+function countData( db_name, tables, callbackFunc) {
     var db, objectStore, request, result = true;
     var data = {};
-    const REQUEST = indexedDB.open(DB_NAME, DB_VERSION);
+    const REQUEST = indexedDB.open(db_name, DB_VERSION);
     REQUEST.onerror = (event) => {
         console.log('ERR: DB REQUEST');
         result = false;
@@ -136,16 +133,13 @@ function countData( tables, callbackFunc) {
     };
 }
 
-async function waitReady( request, cllbackArgs, callbackFunc) {
-    async function timer(second) {
-        return new Promise(resolve => setTimeout(resolve, 1000 * second));
-    }
+async function waitReady( request, callbackArgs, callbackFunc) {
     for (var i = 0; i < MAX_WAIT; i++){
         console.log(`${i}:${request.readyState}`);
         await timer(WAIT_SECOND);
         if (request.readyState == READYSTATE_OK) {
             console.log(`${i}:${request.readyState}`);
-            callbackFunc(request, cllbackArgs);
+            callbackFunc(request, callbackArgs);
             break;
         } else if (i == MAX_WAIT - 1) {
             throw new Error('MAX_WAIT');
@@ -154,11 +148,12 @@ async function waitReady( request, cllbackArgs, callbackFunc) {
 }
 
 async function getFilteredData(
+    db_name,
     table,
     filterFunc,
     callbackFunc
 ) {
-    const REQUEST = indexedDB.open(DB_NAME, DB_VERSION);
+    const REQUEST = indexedDB.open(db_name, DB_VERSION);
     var request, cursor;
     REQUEST.onerror = (event) => {
         console.log('ERR: DB REQUEST');

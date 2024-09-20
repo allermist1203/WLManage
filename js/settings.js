@@ -28,10 +28,12 @@ $('#data_out').on('click', function () {
     }
     const dataDownload = () => {
         getFilteredData(
+            DB_NAME,
             MATCHES_TABLES,
             matchesFilter,
             () => {
                 getFilteredData(
+                    DB_NAME,
                     RESULTS_TABLES,
                     resultsFilter,
                     download
@@ -48,30 +50,26 @@ $('#data_in').on('click', function () {
             DB_NAME,
             Object.keys(TABLES),
             () => {
+                displayLoading();
                 insertData(
                     DB_NAME,
                     jsonData,
-                    () => {
-                        dialog(
-                            MESSGES['deal_OK'],
-                            () => { undisplayLoading();}
-                        );
-                    }
+                    ()=>{dialog(MESSGES['deal_OK'],()=>{});}
                 );
+                undisplayLoading();
             }
         );
     };
     confirm(
         MESSGES['data_in'],
         () => {
-            displayLoading();
             jsonUpload(dataRecovery);
         }
     );
 });
 
 $('.setting_label').on('click', function () {
-    var clickedSetting = $(this).siblings('.setting_area');
+    var clickedSetting = $(this).siblings('.setting_btn_area');
     clickedSetting.slideToggle();
-    $('.setting_area').not(clickedSetting).slideUp();
+    $('.setting_btn_area').not(clickedSetting).slideUp();
 });

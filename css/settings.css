@@ -16,17 +16,17 @@
     cursor: pointer;
 }
 
-.setting_area {
-    text-align: center;
+.setting_btn_area {
+    justify-content: space-around;
     display: none;
+}
+
+.setting_btn_area[style*="display: block"] {
+    display: flex !important;
 }
 
 #data_out,
 #data_in {
-    height: 25px;
-    width: 30%;
-    max-width: 100px;
-    min-width: 50px;
-    border-radius: 5px;
-    margin: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
