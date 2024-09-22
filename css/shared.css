@@ -13,13 +13,16 @@ body {
     font-size: 12px;
 }
 
-#loading {
+.display_lock {
     position: absolute;
     top: 0px;
     width: 100%;
     height: 100%;
     background-color: rgba(100 100 100);
     opacity: 0.8;
+}
+
+#loading {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,9 +35,29 @@ body {
     border-radius: 5px;
 }
 
+.triangle {
+    display: inline-block;
+    background: white;
+    height: calc(tan(60deg) * 15px / 2);
+    width: 15px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    margin: 0px 5px 0px 10px;
+}
+
+.door_bar{
+    margin: 3px 10% 10px 10%;
+    border: 3px solid gray;
+    border-radius: 5px;
+}
+
 input[type="button"],
-input[type="submit"] {
+input[type="submit"],
+input[type="date"] {
     -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-date-and-time-value{
+    text-align: left;
 }
 
 #swal2-html-container{

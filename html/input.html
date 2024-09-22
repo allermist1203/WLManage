@@ -16,7 +16,10 @@
     </div>
     <div id="tag_area">
       <span class="label">タグ</span>
-      <input type="text" name="tag" value="" required />
+      <div class="have_candidacy">
+        <input type="text" name="tag" value="" required />
+        <div class="triangle"></div>
+      </div>
     </div>
     <div id="note_area">
       <span class="label">メモ</span>
@@ -55,11 +58,17 @@
       </div>
       <div>
         <span class="label">使用デッキ</span>
-        <input type="text" name="mydeck1" value="" required />
+        <div class="have_candidacy">
+          <input type="text" name="mydeck1" value="" required />
+          <div class="triangle"></div>
+        </div>
       </div>
       <div>
         <span class="label">対戦デッキ</span>
-        <input type="text" name="enemydeck1" value="" required />
+        <div class="have_candidacy">
+          <input type="text" name="enemydeck1" value="" required />
+          <div class="triangle"></div>
+        </div>
       </div>
     </div>
     <div class="onlyBO3 nreq_input input_area" data-nresult="2">
@@ -93,11 +102,17 @@
       </div>
       <div>
         <span class="label">使用デッキ</span>
-        <input type="text" name="mydeck2" value="" required />
+        <div class="have_candidacy">
+          <input type="text" name="mydeck2" value="" required />
+          <div class="triangle"></div>
+        </div>
       </div>
       <div>
         <span class="label">対戦デッキ</span>
-        <input type="text" name="enemydeck2" value="" required />
+        <div class="have_candidacy">
+          <input type="text" name="enemydeck2" value="" required />
+          <div class="triangle"></div>
+        </div>
       </div>
     </div>
     <div class="onlyBO3 nreq_input input_area" data-nresult="3">
@@ -131,11 +146,17 @@
       </div>
       <div>
         <span class="label">使用デッキ</span>
-        <input type="text" name="mydeck3" value="" required />
+        <div class="have_candidacy">
+          <input type="text" name="mydeck3" value="" required />
+          <div class="triangle"></div>
+        </div>
       </div>
       <div>
         <span class="label">対戦デッキ</span>
-        <input type="text" name="enemydeck3" value="" required />
+        <div class="have_candidacy">
+          <input type="text" name="enemydeck3" value="" required />
+          <div class="triangle"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -143,5 +164,14 @@
     <input type="submit" id="regist" name="regist" value="登録" class="btn1" />
   </div>
 </form>
+<div id="candidacy_form" style="display: none">
+  <div class="display_lock"></div>
+  <div id="candidacy_area" style="display: none">
+    <div class="door_bar"></div>
+    <div>
+      <div id="candidacy_template" class="candidacy label" style="display: none"></div>
+    </div>
+  </div>
+</div>
 <script src="./js/input.js"></script>
 <link type="text/css" rel="stylesheet" href="./css/input.css" />

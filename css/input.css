@@ -32,7 +32,6 @@
 }
 
 #rule_area{
-    display: flex;
     width: 50% !important;
 }
 
@@ -40,6 +39,43 @@
     width: 50%;
 }
 
-div > input[type="text"],input[type="date"]{
+input[type="text"],input[type="date"]{
     width: 100%;
+}
+
+#date_area > input[type="date"] {
+    width: 100%;
+}
+
+.have_candidacy{
+    display: flex;
+    align-items: center;
+}
+
+.have_candidacy > input[type="text"]{
+    width: calc( 100% - 30px );
+}
+
+#candidacy_form > div{
+    position: absolute;
+    bottom: 0px;
+    height: 80%;
+    width: 100%;
+    background-color: #404040;
+}
+
+#candidacy_area > div:not(.door_bar){
+    margin: 0px 10px;
+    width: calc( 100% - 20px );
+    height: calc(100% - 18px);
+    overflow: scroll;
+}
+
+.candidacy {
+    vertical-align: middle;
+    padding: 3px;
+}
+
+.candidacy {
+    border-bottom: 1px solid gray;
 }

@@ -81,12 +81,46 @@ $('#regist_form').submit( function (event) {
     return false;
 });
 
+
+const CANDIDACY_TAG = 'candidacy_tag';
+const CANDIDACY_DECK = 'candidacy_deck';
+$('.triangle').on('click', function () {
+    console.log($(this).siblings('input'));
+    var putInput = $(this).siblings('input');
+    var putTri = $(putInput).attr('name');
+    console.log(`putTri:${putTri}`);
+    $('.candidacy').hide();
+    if (putTri == 'tag') {
+        $(`.${CANDIDACY_TAG}`).show();
+    } else if (putTri.includes('deck')) {
+        $(`.${CANDIDACY_DECK}`).show();
+    }
+    $('.candidacy').off('click');
+    $('.candidacy').on('click', function () {
+        $(putInput).val($(this).text());
+        closeCandidacyFrom();
+    });
+    $('#candidacy_form').show();
+    $('#candidacy_area').slideToggle();
+});
+
+$('.door_bar').on('click', function () {
+    closeCandidacyFrom();
+})
+
+function closeCandidacyFrom() {
+    $('#candidacy_area').slideToggle(
+        callback = () => { $('#candidacy_form').hide(); }
+    );
+}
+
 function setupInputFrom() {
     var matchInfos = { 'ids': [], 'tags': [] };
     var resultInfos = { 'ids': [], 'decks': [] };
     var finGetMatchInfos = false;
     var finGetResulInfos = false;
     const setDisplay = () => {
+        var hCandidacy;
         var newMatchId = aryMax(matchInfos['ids']) + 1;
         var newNResult = aryMax(resultInfos['ids']) + 1;
         $('input[name="match_id"]').val(newMatchId);
@@ -94,16 +128,33 @@ function setupInputFrom() {
         $('input[name="result_id2"]').val(newNResult + 1);
         $('input[name="result_id3"]').val(newNResult + 2);
         changeRequired();
+
+        for (var tag of matchInfos['tags']) {
+            hCandidacy = $('#candidacy_template').clone(false).removeAttr('id');
+            hCandidacy.text(tag);
+            hCandidacy.addClass(CANDIDACY_TAG);
+            hCandidacy.insertBefore('#candidacy_template');
+        }
+        for (var tag of resultInfos['decks']) {
+            hCandidacy = $('#candidacy_template').clone(false).removeAttr('id');
+            hCandidacy.text(tag);
+            hCandidacy.addClass(CANDIDACY_DECK);
+            hCandidacy.insertBefore('#candidacy_template');
+        }
         undisplayLoading();
     };
     const getMatchInfos = (cursor) => {
+        var tag = cursor.value.tag;
         matchInfos['ids'].push(cursor.value.id);
-        matchInfos['tags'].push(cursor.value.tag);
+        if (!matchInfos['tags'].includes(tag)) matchInfos['tags'].push(tag);
     }
     const getResulInfos = (cursor) => {
+        var deck;
         resultInfos['ids'].push(cursor.value.id);
-        resultInfos['decks'].push(cursor.value.mydeck);
-        resultInfos['decks'].push(cursor.value.enemydeck);
+        deck = cursor.value.mydeck;
+        if (!resultInfos['decks'].includes(deck)) resultInfos['decks'].push(deck);
+        deck = cursor.value.enemydeck;
+        if (!resultInfos['decks'].includes(deck)) resultInfos['decks'].push(deck);
     }
     getFilteredData(DB_NAME, MATCHES_TABLES, getMatchInfos, () => { finGetMatchInfos = true; });
     getFilteredData(DB_NAME, RESULTS_TABLES, getResulInfos, () => { finGetResulInfos = true; });
