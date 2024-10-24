@@ -1,25 +1,35 @@
 <div id="list">
   <div id="template_event" class="event" style="display: none">
     <div class="event_info label2">YYYY/MM/DD XXX XXX</div>
-    <div id="template_match" data-mid="" class="match">
-      <div class="results">
-        <div id="template_result" data-rid="" class="result">
-          <div class="rNo label2">N-N</div>
-          <div class="decks label2">
-            <div class="label2">
-              <div class="deck_label">使用デッキ：</div>
-              <div class="mydeck">XXX</div>
+    <div id="template_match" data-mid="" class="match_area">
+      <div class="match">
+        <div class="mNo label2">N</div>
+        <div class="results">
+          <div id="template_result" data-rid="" class="result">
+            <div class="rNo label2">N</div>
+            <div class="decks label2">
+              <div class="label2">
+                <div class="deck_label">使用デッキ：</div>
+                <div class="mydeck">XXX</div>
+              </div>
+              <div class="label2">
+                <div class="deck_label">対戦デッキ：</div>
+                <div class="enemydeck">YYY</div>
+              </div>
             </div>
-            <div class="label2">
-              <div class="deck_label">対戦デッキ：</div>
-              <div class="enemydeck">YYY</div>
-            </div>
+            <div class="turn label2">K</div>
+            <div class="winlose label2">K</div>
           </div>
-          <div class="turn label2">K</div>
-          <div class="winlose label2">K</div>
         </div>
       </div>
-      <div class="note label2">E</div>
+      <div class="edit_btn_area">
+        <div>
+          <input type="button" value="詳細（未）" class="btn1 edit_btn" />
+        </div>
+        <div>
+          <input type="button" value="削除" class="btn2 delete_btn" />
+        </div>
+      </div>
     </div>
   </div>
 </div>

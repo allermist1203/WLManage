@@ -69,7 +69,5 @@ $('#data_in').on('click', function () {
 });
 
 $('.setting_label').on('click', function () {
-    var clickedSetting = $(this).siblings('.setting_btn_area');
-    clickedSetting.slideToggle();
-    $('.setting_btn_area').not(clickedSetting).slideUp();
+    openBtnArea(this, '.setting_btn_area');
 });

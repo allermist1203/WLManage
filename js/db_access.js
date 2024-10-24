@@ -204,3 +204,37 @@ function clearData(db_name, tables, callbackFunc = () => { }) {
         callbackFunc();
     };
 }
+
+function deleteData(db_name, keyDatas, callbackFunc = () => { }) {
+    var db, transaction, objectStore, request, result = true;
+    const REQUEST = indexedDB.open(db_name, DB_VERSION);
+    REQUEST.onerror = (event) => {
+        console.log('ERR: DB REQUEST');
+        result = false;
+    };
+    REQUEST.onsuccess = (event) => {
+        db = event.target.result;
+        transaction = db.transaction(
+            Object.keys(keyDatas),
+            "readwrite"
+        );
+        for (var table in keyDatas) {
+            console.log(`DELETE START: ${table}`)
+            objectStore = transaction.objectStore(table);
+            keyDatas[table].forEach(key => {
+                console.log(`DELETE: ${key}`)
+                request = objectStore.delete(key);
+                request.onsuccess = (event) => {};
+            });
+            console.log(`DELETE FIN: ${table}`)
+        }
+        transaction.oncomplete = (event) => {};
+        transaction.onerror = (event) => {
+            console.log('ERR: DB ACCESS');
+            console.log(event);
+            transaction.abort();
+            result = false;
+        };
+        callbackFunc(keyDatas);
+    };
+}

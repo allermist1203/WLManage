@@ -27,7 +27,7 @@ function getDataByEvent(game_code) {
     var setupList = () => {
         var events, eventName, event, match, result;
         var hEvent, hMatch, hResult;
-        var hMatchId, hResultId, rNo, matchId, resultId;
+        var hMatchId, hResultId, matchId, resultId;
         events = {};
         // matchデータをイベントごとに振り分け
         for (matchId in matches) {
@@ -35,6 +35,7 @@ function getDataByEvent(game_code) {
             eventName = `${match['date']} ${RULES[match['rule']]} ${match['tag']}`;
             if (!(eventName in events)) events[eventName] = {};
             events[eventName][matchId] = {
+                'req-rNo':RULES[match['rule']]!=RULE_NORMAL,
                 'note':match['note'],
                 'results':match['results'],
             }
@@ -48,7 +49,7 @@ function getDataByEvent(game_code) {
             hEvent.find('#template_match').remove();
             // イベント名挿入
             hEvent.children('.event_info').text(eventName);
-            hMatchId = Object.keys(event).length+1;;
+            hMatchId = Object.keys(event).length+1;
             for ( matchId of dictKeyDecSort(event)) {
                 match = event[matchId];
                 hMatchId -= 1;
@@ -56,25 +57,27 @@ function getDataByEvent(game_code) {
                 hMatch = $('#template_match').clone(true).removeAttr('id');
                 // resultのみ削除
                 hMatch.find('#template_result').remove();
+                hMatch.find('.mNo').text(hMatchId);
+                hMatch.attr('data-mid', matchId);
                 hResultId = Object.keys(match['results']).length+1;
                 for ( resultId of dictKeyDecSort(match['results'])) {
                     // result毎にテンプレートコピー&データ挿入
                     result = match['results'][resultId];
                     hResultId -= 1;
-                    rNo = `${hMatchId}-${hResultId}`
                     hResult = $('#template_result').clone(true).removeAttr('id');
-                    hResult.find('.rNo').text(rNo);
+                    if (match['req-rNo']) {
+                        hResult.find('.rNo').text(hResultId);
+                    } else {
+                        hResult.find('.rNo').text(NO_ITEM);
+                    }
                     hResult.find('.mydeck').text(result['mydeck']);
                     hResult.find('.enemydeck').text(result['enemydeck']);
                     hResult.find('.turn').text(TURN[result['turn']]['list']);
                     hResult.find('.winlose').text(WINLOSE[result['winlose']]['list']);
                     hResult.attr('data-rid', resultId);
                     // マッチ>resultsへ追加
-                    hResult.appendTo(hMatch.children('.results'));
+                    hResult.appendTo(hMatch.find('.results'));
                 }
-                // note挿入&mid挿入
-                hMatch.attr('data-mid', matchId);
-                hMatch.children('.note').text(NOTE[match['note']]);
                 // イベントへ追加
                 hMatch.appendTo(hEvent);
             }
@@ -104,4 +107,38 @@ function getDataByEvent(game_code) {
 $('#list').ready(function () {
     changeHeader(GAME_SELECTOR);
     getDataByEvent($('#game_selector').val());
+});
+
+$('.match').on('click', function () {
+    openBtnArea(this, '.edit_btn_area');
+});
+
+$('.delete_btn').on('click', function () {
+    var keyDatas = {
+        [MATCHES_TABLES] : [],
+        [RESULTS_TABLES] : [],
+    };
+    var matchArea = $(this).closest('.match_area');
+    displayLoading();
+    keyDatas[MATCHES_TABLES] = [$(matchArea).attr('data-mid'),];
+    $(matchArea).find('.result').each(function(i ,elem){
+        keyDatas[RESULTS_TABLES].push($(elem).attr('data-rid'));
+    });
+
+    confirm(
+        MESSGES['delete_confrim'],
+        () => {
+            deleteData(
+                DB_NAME,
+                keyDatas,
+                () => {
+                    dialog(
+                        MESSGES['deal_OK'],
+                        () => { loadPage('list'); }
+                    );
+                },
+            )
+        },
+    );
+    
 });

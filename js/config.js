@@ -25,6 +25,8 @@ const NOTE = {
     [false] : '無',
 }
 
+const NO_ITEM = '-';
+
 const HTMLS = {
     'input': './html/input.html',
     'statistics':'./html/statistics.html',
@@ -34,8 +36,9 @@ const HTMLS = {
 const MESSGES = {
     'error': '予期せぬエラーが発生しました。',
     'data_out': 'データを出力しますか?',
-    'data_in': 'データを復元しますか?<br>※データは上書きされます',
+    'data_in': 'データを復元しますか？<br>※データは上書きされます',
     'deal_OK': '処理が完了しました',
+    'delete_confrim': '削除して良いですか？<br>※元に戻せません',
 }
 
 const WAIT_SECOND = 1;

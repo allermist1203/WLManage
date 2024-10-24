@@ -12,6 +12,7 @@ $('#regist_form').ready(function () {
                 day: "2-digit"
             }).replaceAll('/', '-'));
     createTrunRadioBox();
+    createWLRadioBox();
     setupInputFrom();
 });
 
@@ -164,6 +165,15 @@ function setupInputFrom() {
 function changeRequired() {
     $('.req_input input[type="text"]').prop('required', true);
     $('.nreq_input input[type="text"]').prop('required', false);
+    switch (RULES[getCheckedVal('rule')]) {
+        case RULE_NORMAL:
+            $('.onlyBO3').hide();
+            break;
+        case RULE_BO3:
+            $('.onlyBO3:not(.nreq_input)').show();
+        default:
+            break;
+    }
 }
 
 function getCheckedVal(name) {
@@ -227,5 +237,11 @@ function createRadioBox( toClass, name, content) {
 function createTrunRadioBox() {
     for (var i = 1; i < 4; i++){
         createRadioBox(`turn_area${i}`, `turn${i}`, TURN);
+    }
+}
+
+function createWLRadioBox() {
+    for (var i = 1; i < 4; i++){
+        createRadioBox(`winlose_area${i}`, `winlose${i}`, TURN);
     }
 }

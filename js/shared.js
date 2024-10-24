@@ -47,6 +47,19 @@ function changeHeader( mode, headerTitle='') {
     $('#non_selector').text(headerTitle);
 }
 
+function loadPage( pageName) {
+    displayLoading();
+    $('.changemode').removeClass('selected');
+    $(`[data-mode="${pageName}"]`).addClass('selected');
+    $('#content').load(`./html/${pageName}.html`);
+}
+
+function openBtnArea( elm, xpath) {
+    var clickedSetting = $(elm).siblings(xpath);
+    clickedSetting.slideToggle();
+    $(xpath).not(clickedSetting).slideUp();
+};
+
 async function confirm(msg,callbackFunc) {
     Swal.fire({
         html: msg,
